@@ -50,9 +50,9 @@ barclamp:
 
 crowbar:
   layout: 1
-  order: 1000
-  run_order: 1000
-  chef_order: 1000
+  order: 1200
+  run_order: 1200
+  chef_order: 1200
   proposal_schema_version: 2
 
 nav:
@@ -107,6 +107,7 @@ debs:
       - libxslt-dev
       - libxml2-dev
 
+
     
 ## rpms does the same thing that debs does, except for RPM-based systems.
 #rpms:
@@ -146,7 +147,8 @@ gems:
   pkgs:
     # put your gems here.
     - cucumber
-    - fog # Will try and pull rails-2.3.12 exactly.
+    - fog
+
 
 # extra_files downloads and saves a file to be slipstreamed on to the 
 # crowbar .iso in the extra/files directory (or a subdirectory thereof).
