@@ -1,0 +1,10 @@
+[DEFAULT]
+# Show more verbose log output (sets INFO log level output)
+verbose = <%= node[:openstack_verification][:verbose] %>
+
+# Show debugging output in logs (sets DEBUG log level output)
+debug = <%= node[:openstack_verification][:debug] %>
+
+[app:openstack_verification-api]
+paste.app_factory = openstack_verification.server:app_factory
+

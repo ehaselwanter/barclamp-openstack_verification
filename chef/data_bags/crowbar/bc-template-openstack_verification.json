@@ -1,0 +1,29 @@
+{
+  "id": "bc-template-openstack_verification",
+  "description": "Installation for Openstack verification",
+  "attributes": {
+    "openstack_verification": {
+      "foo": "bar"
+    }
+  },
+  "deployment": {
+    "openstack_verification": {
+      "crowbar-revision": 0,
+      "element_states": {
+        "openstack_verification-server": [ "readying", "ready", "applying" ]
+      },
+      "elements": {},
+      "element_order": [
+        [ "openstack_verification-server" ]
+      ],
+      "config": {
+        "environment": "openstack_verification-base-config",
+        "mode": "full",
+        "transitions": false,
+        "transition_list": [
+        ]
+      }
+    }
+  }
+}
+
