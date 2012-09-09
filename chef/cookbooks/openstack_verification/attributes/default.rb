@@ -13,10 +13,4 @@
 # limitations under the License.
 #
 
-override[:openstack_verification][:user]="openstack_verification"
-
-# declare what needs to be monitored
-node[:openstack_verification][:monitor]={}
-node[:openstack_verification][:monitor][:svcs] = []
-node[:openstack_verification][:monitor][:ports]={}
 
