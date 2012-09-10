@@ -1,6 +1,6 @@
+package 'libxslt-dev'
+package 'libxml2-dev'
 
-p = package 'libxslt-dev'
-p.run_action(:install)
+gem_package "fog"
+gem_package "cucumber"
 
-p = package 'libxml2-dev'
-p.run_action(:install)

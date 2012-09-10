@@ -103,12 +103,12 @@ debs:
       - deb-src http://extras.ubuntu.com/ubuntu precise main
       - deb http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse
       - deb-src http://security.ubuntu.com/ubuntu precise-security main restricted universe multiverse
+    build_pkgs:
+      - libxslt-dev
+      - libxml2-dev
     pkgs:
       - libxslt-dev
       - libxml2-dev
-
-
-    
 ## rpms does the same thing that debs does, except for RPM-based systems.
 #rpms:
 #  repos:
