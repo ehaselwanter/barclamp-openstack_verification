@@ -1,4 +1,4 @@
-Feature: Basic OpensStack avablity
+Feature: Basic OpenStack avablity
 In order to see if Openstack is OpenStack
 as an Admin
 I want to use some basic API functions

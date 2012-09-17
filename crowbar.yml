@@ -146,6 +146,7 @@ debs:
 gems:
   pkgs:
     # put your gems here.
+    - cuken
     - cucumber
     - fog
 

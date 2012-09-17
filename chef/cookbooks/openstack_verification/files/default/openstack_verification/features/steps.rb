@@ -119,19 +119,19 @@ def wait_for_delete_without_error(volume_or_snap)
     end
 end
 
-After do
-  openstack.reload
-  openstack.servers.each do |s|
-    s.destroy
-  end
-
-  openstack.snapshots.each do |s|
-    s.destroy
-    wait_for_delete_without_error(s)
-  end
-  openstack.volumes.each do |v|
-     v.wait_for { v.status == "available" }
-     v.destroy
-     wait_for_delete_without_error(v)
-   end
-end
+#After do
+#  openstack.reload
+#  openstack.servers.each do |s|
+#    s.destroy
+#  end
+#
+#  openstack.snapshots.each do |s|
+#    s.destroy
+#    wait_for_delete_without_error(s)
+#  end
+#  openstack.volumes.each do |v|
+#     v.wait_for { v.status == "available" }
+#     v.destroy
+#     wait_for_delete_without_error(v)
+#   end
+#end

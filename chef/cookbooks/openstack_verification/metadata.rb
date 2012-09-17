@@ -1,8 +1,6 @@
-maintainer       "User Unknown"
-maintainer_email "Unknown@Sample.com"
+maintainer       "Edmund Haselwanter"
+maintainer_email "edmund@haselwanter.com"
 license          "Apache 2.0"
 description      "Installs/Configures Openstack verification"
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.me'))
-version          "0.0"
-
-depends "nagios"
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version          "0.0.1"
