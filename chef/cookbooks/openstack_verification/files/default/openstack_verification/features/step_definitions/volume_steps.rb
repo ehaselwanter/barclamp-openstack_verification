@@ -1,6 +1,3 @@
-require 'fog'
-require 'timeout'
-
 Given /^a running server "(.*?)" with image "(.*?)" and name "(.*?)"$/ do |flavor_name, image_name, server_name|
 
   flavor = openstack.flavors.find { |f| f.name == flavor_name}
@@ -20,9 +17,7 @@ end
 
 Given /^the volume "(.*?)" is in status "(.*?)" after "(.*?)" seconds$/ do |volume_name, status, timeout|
   volume = openstack.volumes.find { |v| v.name == volume_name }
-  Timeout::timeout(timeout.to_i) {
-    volume.wait_for { volume.status == status }
-  }
+  volume.wait_for(timeout.to_i) { volume.status == status }
 end
 
 Given /^I attach the volume "(.*?)" to server "(.*?)"$/ do |volume_name, server_name|
@@ -40,29 +35,12 @@ Then /^there should be volumes$/ do |table|
   end
 end
 
-When /^I shut down the server "(.*?)"$/ do |name|
-  server = server_by_name(name)
-  server.destroy
-end
-
 When /^detach the volume "(.*?)" \((\d+) times\)$/ do |volume_name, number|
   volume = volume_by_name(volume_name)
   attachment = volume.attachments.last
   number.to_i.times do
     volume.detach(attachment["serverId"], attachment["id"])
   end
-end
-
-Then /^the server "(.*?)" should be shut down$/ do |name|
-  server = server_by_name(name)
-  begin
-    server.wait_for { server.state != "ACTIVE" }
-  rescue Fog::Errors::Error
-    #
-  end
-  server = server_by_name(name)
-
-  server.should == nil
 end
 
 Then /^the volume "(.*?)" should be detached$/ do|volume_name|
@@ -79,6 +57,10 @@ end
 Then /^there should be no volumes$/ do
   openstack.reload
   openstack.volumes.size.should == 0
+end
+
+Then /^there should be no volume with name "(.*?)"$/ do |volume_name|
+  volume_by_name(volume_name).should be_nil
 end
 
 When /^I create a snapshot "(.*?)" from "(.*?)"$/ do |snap_name, volume_name|
@@ -106,32 +88,16 @@ def server_by_name(server_name)
   openstack.servers.find {|s| s.name == server_name }
 end
 
-def openstack()
-  @openstack ||= Fog::Compute.new(:provider => "OpenStack")
-end
 
 def wait_for_delete_without_error(volume_or_snap)
   begin
       volume_or_snap.wait_for { volume_or_snap.status != "deleting" }
-    rescue Fog::Errors::Error
+  rescue Fog::Errors::Error
       # When volume is gone there will be an fog error.
       # A better solution should be found
-    end
+  end
 end
 
-#After do
-#  openstack.reload
-#  openstack.servers.each do |s|
-#    s.destroy
-#  end
-#
-#  openstack.snapshots.each do |s|
-#    s.destroy
-#    wait_for_delete_without_error(s)
-#  end
-#  openstack.volumes.each do |v|
-#     v.wait_for { v.status == "available" }
-#     v.destroy
-#     wait_for_delete_without_error(v)
-#   end
-#end
+After('@volume') do
+  # see
+end

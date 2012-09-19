@@ -146,7 +146,7 @@ debs:
 gems:
   pkgs:
     # put your gems here.
-    - cuken
+    - rspec
     - cucumber
     - fog
 
