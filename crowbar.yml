@@ -157,6 +157,7 @@ gems:
 # anything that looks like an Oracle java rpm.bin and treat the extracted
 # .rpm files as if they were provided by raw_pkgs. 
 extra_files:
+  - http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-uec.tar.gz openstack_verification
 #  # will place file into extra/files
 #  - http://some/file
 #  # will place file into extra/files/foo
