@@ -3,6 +3,7 @@ package 'libxml2-dev'
 
 gem_package "fog"
 gem_package "cucumber"
+gem_package "rspec"
 
 env_filter = " AND keystone_config_environment:keystone-config-#{node[:nova][:keystone_instance]}"
 keystones = search(:node, "recipes:keystone\\:\\:server#{env_filter}") || []
