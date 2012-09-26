@@ -69,11 +69,20 @@ Given /^a running OpenStack system$/ do
 end
 
 When /^I request the VMs list$/ do
-  pending # express the regexp above with the code you wish you had
+  openstack.reload
+  @vm_list = openstack.servers
 end
 
 Then /^I should be able to see these VMs$/ do |table|
   # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.map_headers!('Name' => :name, 'Status' => :state)
+  instance_name_and_state = @vm_list.collect { |instance|
+    {
+        :name => instance.name,
+        :state => instance.state
+    }
+  }
+
+  instance_name_and_state.should include(table.hashes)
 end
 

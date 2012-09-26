@@ -10,12 +10,17 @@ Scenario: Start a server
 	 And I request the VMs list
 	 Then I should be able to see these VMs
 	  | Name 	      | Status |
-	  | sample-server | BUILD  |
+	  | sample-server | ACTIVE |
+  
+Scenario: Stop a running VM
+    Given a running VM named "sample-server"
+    When I shut down the server "sample-server"
+    Then the server "sample-server" should be shut down
 
 Scenario: Start and stop a server server
 	Given a running OpenStack system
-	  And I start a VM with flavor "m1.tiny", image "test-image" and name "sample-server"
-	 When I shut down the server "sample-server"
+	  And I start a VM with flavor "m1.tiny", image "test-image" and name "sample-server-2"
+	 When I shut down the server "sample-server-2"
 	  And I request the VMs list
 	 Then I should be able to see these VMs
 	  | Name 	      | Status |
